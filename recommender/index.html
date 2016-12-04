@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html lang="en" ng-app="searchApp">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="../recommender/lib/jquery.min.js"></script>
+        <script src="../recommender/lib/bootstrap.min.js"></script>
+        <script src="../recommender/lib/angular.js"></script>
+        <script src="../recommender/lib/angular-route.min.js"></script>
+        <script src="checklist-model.js"></script>
+        <script src="app.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <title> The Restaurant recommender - Welcome </title>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#/">The Restaurant recommender</a>
+                </div>
+            </div>  
+        </nav>
+
+        <div id="main">
+            <div ng-view></div>
+        </div>
+    </body>
+</html>

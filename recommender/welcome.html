@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<div class = "row">
+    <h1 class = "text-center"> Where to eat? </h1>
+</div>
+<div class = "row" style="margin-left:15%; margin-right:15%; margin-top:50px">
+    <div class = "col-md-3">
+    </div>
+
+    <div class = "col-md-6">  
+        <input type="text" class="form-control" id="Location" placeholder="Which city?" ng-model="criteria.Location"> </br>
+    </div>
+    <!-- <div class = "col-md-4 form-group">
+        <input type="text" class="form-control" id="CuisineType" placeholder="Which type of food?" ng-model="criteria.CuisineType"> </br>
+    </div>
+    <div class = "col-md-4 form-group">
+        <input type="text" class="form-control" id="PriceRange" placeholder="How much to spend per person?" ng-model="criteria.PriceRange"> </br>
+    </div> -->
+    <div class = "col-md-6">
+        <input type="button" class="btn btn-info pull-right" ng-click="reset()" value="Reset">
+    </div>
+    <div>
+        <a href = "#search">
+            <input type="button" class="btn btn-info pull-left" ng-click="update(basic)" value="Next">
+        </a>
+    </div>
+</div>           
+
+   
+
+<div class = "row" style="margin-left:15%; margin-right:15%; margin-top:50px">
+    <div class = "col-lg-12 text-center">
+        <h2> How to use </h2>
+    </div>
+    <div class = "col-lg-4 text-center">
+        <h3> Step 1 </h3>
+    </div>
+    <div class = "col-lg-4 text-center">
+        <h3> Step 2 </h3>
+    </div>
+    <div class = "col-lg-4 text-center">
+        <h3> Step 3 </h3>
+    </div>
+</div>
+</html>
