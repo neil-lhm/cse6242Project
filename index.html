@@ -5,10 +5,10 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="../recommender/lib/jquery.min.js"></script>
-        <script src="../recommender/lib/bootstrap.min.js"></script>
-        <script src="../recommender/lib/angular.js"></script>
-        <script src="../recommender/lib/angular-route.min.js"></script>
+        <script src="lib/jquery.min.js"></script>
+        <script src="lib/bootstrap.min.js"></script>
+        <script src="lib/angular.js"></script>
+        <script src="lib/angular-route.min.js"></script>
         <script src="checklist-model.js"></script>
         <script src="app.js"></script>
         <link rel="stylesheet" href="style.css">
@@ -27,5 +27,20 @@
         <div id="main">
             <div ng-view></div>
         </div>
+        <script type="text/javascript">
+            var features;
+            var featuresJSON = $.getJSON('features.json', function (data){
+                features = data;
+            });
+            var businesses;
+            var businessesJSON = $.getJSON('business.json', function (data){
+                businesses = data;
+            });
+
+            var keys = [];
+            for (var k in businesses) keys.push(k);
+            // console.log(keys);
+
+        </script>
     </body>
 </html>
