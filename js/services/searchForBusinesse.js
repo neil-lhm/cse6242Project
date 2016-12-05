@@ -34,29 +34,57 @@ function(sharedVariables){
         return isMatch;
     }
 
-    this.getHighRatedBusinesses = function(){
+    function getBusinesses(featureIdsToSearch, existedBusinessIds) {
         var details = sharedVariables.getDetails();
         var allBusinesses = sharedVariables.getBusinesses();
         var allFeatures = sharedVariables.getFeatures();
         var count = 0;
         var businesses = [];
+        //console.log('calling getBusinesses');
         for (var key in details) {
-            var business = details[key];
-            if (business['stars'] > 3.5) {
-                business["id"] = key;
-                businesses.push(business);
-                var featureIdsOfThisBusiness = allBusinesses[key];
-                var featuresOfThisBusiness = [];
-                for (var k in featureIdsOfThisBusiness) {
-                    featuresOfThisBusiness.push(allFeatures[k]);
+            if (existedBusinessIds.indexOf(key) < 0 || existedBusinessIds.length == 0) {
+                var business = details[key];
+                if (business['stars'] > 3.5) {
+                    business["id"] = key;
+                    var featureIdsOfThisBusiness = allBusinesses[key];
+
+                    var isMatch = false;
+                    for (var featureId in featureIdsToSearch) {
+                        if (featureIdsOfThisBusiness.indexOf(featureId) > -1) {
+                            isMatch = true;
+                            break;
+                        } 
+                    }
+                    if (isMatch || featureIdsToSearch.length == 0) {
+                        //console.log('found matches');
+                        var featuresOfThisBusiness = [];
+                        var ids = [];
+                        for (var k in featureIdsOfThisBusiness) {
+                            featuresOfThisBusiness.push(allFeatures[k]);
+                            ids.push(k);
+                        }
+                        business["features"] = featuresOfThisBusiness;
+                        business["featureIds"] = ids;
+                        businesses.push(business);
+                        count += 1;
+                    }
+
                 }
-                business["features"] = featuresOfThisBusiness;
-                count += 1;
+                if (count >= numOfBusinessesToSearchFor) break;
             }
-            if (count >= numOfBusinessesToSearchFor) break;
+
         }
         return businesses;
     }
+
+    this.getHighRatedBusinesses = function(){
+        return getBusinesses([], []);
+    }
+
+    this.getSimilarRestaurants = function(featureIdsToSearch, existedBusinessIds) {
+        return getBusinesses(featureIdsToSearch, existedBusinessIds);
+    }
+
 
 
 }]);

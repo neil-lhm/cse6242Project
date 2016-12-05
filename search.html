@@ -16,15 +16,15 @@
 
     <table  ng-show = "isFeatureShown">  
         <h3 class = "text-center"> </h3>
-        <tr ng-repeat = "y in searchfeature">
+        <tr ng-repeat = "y in featuresToSearchFor">
             <td> 
-                <input type="checkbox" data-checklist-model="featurelist.searchfeature" data-checklist-value="y"> {{y}}
+                <input type="checkbox" checklist-model="selectedFeatures" checklist-value="y"> {{y.name}}
             </td>
         </tr>
         <tr>
-            <td> <input type = "button" class="btn btn-info" ng-click = "select()" value = "Select All"> </td>
-            <td> <input type = "button" class="btn btn-info" ng-click = "show()" value = "Show Restaurants"> </td>
-            <td> <input type = "button" class="btn btn-info" ng-click = "clear()" value = "Reset"> </td>
+            <td> <input type = "button" class="btn btn-info" ng-click = "selectAllFeatures()" value = "Select All"> </td>
+            <td> <input type = "button" class="btn btn-info" ng-click = "getSimilarRestaurants()" value = "Find Similar Restaurants"> </td>
+            <td> <input type = "button" class="btn btn-info" ng-click = "unselectAllFeatures()" value = "Reset"> </td>
         
         </tr>
     </table> 
@@ -34,15 +34,15 @@
 <table class = "col-sm-8">
     <tr ng-repeat="x in restaurants">
         <td> 
-            <input type="checkbox" data-checklist-model="user.restaurants" data-checklist-value="x"> {{ x.name }}
+            <input type="checkbox" data-checklist-model="selectedRestaurants" data-checklist-value="x"> {{ x.name }}
         </td>
         <td> {{ x.stars }}</td>
         <td> {{ x.price }} </td>
         <td> {{ x.category }} </td>
     </tr>
     <tr>
-        <td> <input type="button" class="btn btn-info" ng-click="checkAll()" value="Select All"> </td>
-        <td> <input type="button" class="btn btn-info" ng-click="search()" value="Find feature"> </td>
-        <td> <input type="button" class="btn btn-info" ng-click="uncheckAll()" value="Reset"> </td>
+        <td> <input type="button" class="btn btn-info" ng-click="selectAllRestaurants()" value="Select All"> </td>
+        <td> <input type="button" class="btn btn-info" ng-click="findFeaturesOfSelectedRestaurants()" value="Find feature"> </td>
+        <td> <input type="button" class="btn btn-info" ng-click="unselectedRestaurants()" value="Reset"> </td>
     </tr>
 </table>
