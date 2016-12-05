@@ -22,19 +22,18 @@ function($scope, sharedVariables, feature, business, details, searchForBusinesse
       sharedVariables.setBusinessIds(businessIds);
       //console.log(sharedVariables.getBusinessIds());
 
-      console.log(searchForBusinesse.getBusinessIdsGivenFeatures([1,2]));
+      //console.log(searchForBusinesse.getBusinessIdsGivenFeatures([1,2]));
       details.getDetails().$promise.then(function(details){
         sharedVariables.setDetails(details);
         var startingRecommendations = searchForBusinesse.getHighRatedBusinesses();
-        console.log(startingRecommendations);
+        // /console.log(startingRecommendations);
 
-        // $scope.restaurants = [
-        //   {name: 'Starbucks', stars: 3.5, category: ['Fast Food','Coffee'], feature: ['good service','fast']},
-        //   {name: 'Panda Express', stars: 3, category: ['Fast Food','Chinese','Restaurants'] , feature: ['good dessert','good service']}
-        // ];
+
+        $scope.isFeatureShown = false;
+
         $scope.restaurants = startingRecommendations;
 
-        $scope.searchfeature = [];
+        $scope.featuresToSearchFor = [];
 
 
         $scope.user = {
@@ -42,62 +41,76 @@ function($scope, sharedVariables, feature, business, details, searchForBusinesse
         };
 
         $scope.featurelist = {
-          searchfeature: []
+          featuresToSearchFor: []
         }
         
         $scope.result = [];
         
 
         $scope.select = function() {
-          $scope.featurelist.searchfeature = angular.copy($scope.searchfeature);
+          $scope.featurelist.featuresToSearchFor = angular.copy($scope.featuresToSearchFor);
         };
 
         $scope.clear = function() {
-          $scope.featurelist.searchfeature = [];
+          $scope.featurelist.featuresToSearchFor = [];
         };
 
         $scope.show = function() {
           $scope.result = [];
-          for (var i = 0; i < $scope.featurelist.searchfeature.length; i++) {
-            if ($scope.result.indexOf($scope.featurelist.searchfeature[i]) < 0) {
-              $scope.result.push($scope.featurelist.searchfeature[i]);
+          for (var i = 0; i < $scope.featurelist.featuresToSearchFor.length; i++) {
+            if ($scope.result.indexOf($scope.featurelist.featuresToSearchFor[i]) < 0) {
+              $scope.result.push($scope.featurelist.featuresToSearchFor[i]);
             }
           };
           console.log($scope.result);
 
         };
         $scope.checkAll = function() {
-          $scope.searchfeature = [];
+          $scope.featuresToSearchFor = [];
           $scope.user.restaurants = angular.copy($scope.restaurants);
-          for (var i = 0; i < $scope.user.restaurants.length; i++) {
-            for (var j = 0; j < $scope.user.restaurants[i].feature.length; j++) {
-              if ($scope.searchfeature.indexOf($scope.user.restaurants[i].features[j]) < 0) {
-                $scope.searchfeature.push($scope.user.restaurants[i].features[j]);
+
+          console.log($scope.user.restaurants);
+          $scope.user.restaurants.forEach(function(restaurant){
+
+            restaurant.features.forEach(function(feature){
+              if ($scope.featuresToSearchFor.indexOf(feature) > -1) {
+                $scope.featuresToSearchFor.push(feature);
               }
-            }
-          };
+            })
+          });
+          // for (var restaurant in $scope.user.restaurants ) {
+          //   var featuresOfCurRestaurant = restaurant.features;
+          //   for (var feature in featuresOfCurRestaurant) {
+          //     $scope.featuresToSearchFor.push(feature);
+          //   }
+          // };
+          console.log($scope.featuresToSearchFor);
 
         };
 
         $scope.uncheckAll = function() {
           $scope.user.restaurants = [];
-          $scope.searchfeature = [];
+          $scope.featuresToSearchFor = [];
         };
         $scope.setToNull = function() {
           $scope.user.restaurants = null;
         };
 
         $scope.search = function() {
-          $scope.searchfeature = [];
+          $scope.featuresToSearchFor = [];
 
           for (var i = 0; i < $scope.user.restaurants.length; i++) {
             for (var j = 0; j < $scope.user.restaurants[i].features.length; j++) {
-              if ($scope.searchfeature.indexOf($scope.user.restaurants[i].features[j]) < 0) {
-                $scope.searchfeature.push($scope.user.restaurants[i].features[j]);
+              if ($scope.featuresToSearchFor.indexOf($scope.user.restaurants[i].features[j]) < 0) {
+                $scope.featuresToSearchFor.push($scope.user.restaurants[i].features[j]);
               }
             }
           };
+          $scope.isFeatureShown = true;
         };
+
+
+
       })
     })
   });

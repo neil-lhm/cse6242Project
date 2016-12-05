@@ -12,21 +12,24 @@
     </div>
 </div>
 
+<div class = "col-sm-4"> 
 
-<table class = "col-sm-4">  
-    <h3 class = "text-center"> </h3>
-    <tr ng-repeat = "y in searchfeature">
-        <td> 
-            <input type="checkbox" data-checklist-model="featurelist.searchfeature" data-checklist-value="y"> {{y}}
-        </td>
-    </tr>
-    <tr>
-        <td> <input type = "button" class="btn btn-info" ng-click = "select()" value = "Select All"> </td>
-        <td> <input type = "button" class="btn btn-info" ng-click = "show()" value = "Show Restaurants"> </td>
-        <td> <input type = "button" class="btn btn-info" ng-click = "clear()" value = "Reset"> </td>
-    
-    </tr>
-</table> 
+    <table  ng-show = "isFeatureShown">  
+        <h3 class = "text-center"> </h3>
+        <tr ng-repeat = "y in searchfeature">
+            <td> 
+                <input type="checkbox" data-checklist-model="featurelist.searchfeature" data-checklist-value="y"> {{y}}
+            </td>
+        </tr>
+        <tr>
+            <td> <input type = "button" class="btn btn-info" ng-click = "select()" value = "Select All"> </td>
+            <td> <input type = "button" class="btn btn-info" ng-click = "show()" value = "Show Restaurants"> </td>
+            <td> <input type = "button" class="btn btn-info" ng-click = "clear()" value = "Reset"> </td>
+        
+        </tr>
+    </table> 
+
+</div>
  
 <table class = "col-sm-8">
     <tr ng-repeat="x in restaurants">
