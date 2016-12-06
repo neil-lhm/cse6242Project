@@ -2,7 +2,7 @@ var app = angular.module('recommender');
 
 app.service('searchForBusinesse',['sharedVariables', 
 function(sharedVariables){
-    var numOfBusinessesToSearchFor = 10;
+    var numOfBusinessesToSearchFor = 6;
 
     this.getBusinessIdsGivenFeatures= function(features) {
         var allbusinessIds = sharedVariables.getBusinessIds();
@@ -11,7 +11,7 @@ function(sharedVariables){
         var businessIds = [];
         for (var id in allbusinessIds) {
             
-            if (doesThisBusinessHaveAllTheseFeatures(allBusinesses[allbusinessIds[id]], features)) {
+            if (doesThisBusinessHaveSomeOfTheseFeatures(allBusinesses[allbusinessIds[id]], features)) {
                 businessIds.push(allbusinessIds[id]);
                 count += 1;
             }
@@ -20,12 +20,11 @@ function(sharedVariables){
         return businessIds;
     }
 
-    function doesThisBusinessHaveAllTheseFeatures(business, features) {
+    function doesThisBusinessHaveSomeOfTheseFeatures(business, features) {
         var featuresThisBusinessHas = [];
         for (var key in business) {
             featuresThisBusinessHas.push(key);
         }
-        //console.log(featuresThisBusinessHas);
         var isMatch = false; 
         for (var feature in features) {
             // -1 means the element is not in array
@@ -46,8 +45,8 @@ function(sharedVariables){
                 var business = details[key];
                 if (business['stars'] > 3.5) {
                     business["id"] = key;
-                    var featureIdsOfThisBusiness = allBusinesses[key];
-
+                    var featureIdsOfThisBusiness = [];
+                    for (var k in allBusinesses[key]) featureIdsOfThisBusiness.push(k);
                     var isMatch = false;
                     for (var featureId in featureIdsToSearch) {
                         if (featureIdsOfThisBusiness.indexOf(featureId) > -1) {
@@ -59,9 +58,11 @@ function(sharedVariables){
                         //console.log('found matches');
                         var featuresOfThisBusiness = [];
                         var ids = [];
-                        for (var k in featureIdsOfThisBusiness) {
-                            featuresOfThisBusiness.push(allFeatures[k]);
-                            ids.push(k);
+                        //console.log(featureIdsOfThisBusiness);
+                        for (var i = 0; i < featureIdsOfThisBusiness.length; i++) {
+                            //console.log(k);
+                            featuresOfThisBusiness.push(allFeatures[featureIdsOfThisBusiness[i]]);
+                            ids.push(featureIdsOfThisBusiness[i]);
                         }
                         business["features"] = featuresOfThisBusiness;
                         business["featureIds"] = ids;
@@ -74,6 +75,7 @@ function(sharedVariables){
             }
 
         }
+        console.log(businesses);
         return businesses;
     }
 

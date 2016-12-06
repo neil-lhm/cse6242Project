@@ -3,14 +3,6 @@ var app = angular.module('recommender');
 app.controller('searchPage', 
 ['$scope', 'sharedVariables', 'features', 'business', 'details', 'searchForBusinesse',
 function($scope, sharedVariables, feature, business, details, searchForBusinesse) {
-  
-  // loadData.loadFeatures().then(function(){
-  //   businesses = sharedVariables.getAllFeatures();
-  // });
-  //var businesses = sharedVariables.getAllFeatures(); 
-  //console.log(businesses);
-  
-  //console.log(sharedVariables.getAllFeatures());
 
   feature.getFeatures().$promise.then(function(features){
     sharedVariables.setFeatures(features);
@@ -20,13 +12,10 @@ function($scope, sharedVariables, feature, business, details, searchForBusinesse
       var businessIds = [];
       for (var key in businesses) businessIds.push(key);
       sharedVariables.setBusinessIds(businessIds);
-      //console.log(sharedVariables.getBusinessIds());
 
-      //console.log(searchForBusinesse.getBusinessIdsGivenFeatures([1,2]));
       details.getDetails().$promise.then(function(details){
         sharedVariables.setDetails(details);
         var startingRecommendations = searchForBusinesse.getHighRatedBusinesses();
-        // /console.log(startingRecommendations);
 
 
         $scope.isFeatureShown = false;
@@ -46,10 +35,6 @@ function($scope, sharedVariables, feature, business, details, searchForBusinesse
           $scope.selectedFeatures = angular.copy($scope.featuresToSearchFor);
         };
 
-        $scope.unselectAllFeatures = function() {
-          $scope.selectedFeatures = [];
-        };
-
         $scope.getSimilarRestaurants = function() {
           var featureIds = [];
           for (var i = 0; i < $scope.selectedFeatures.length; i++) {
@@ -59,24 +44,13 @@ function($scope, sharedVariables, feature, business, details, searchForBusinesse
           for (var i = 0; i < $scope.restaurants.length; i++) {
             businessIds.push($scope.restaurants[i].id);
           }
-          console.log(featureIds);
-          console.log(businessIds);
-          console.log(searchForBusinesse.getSimilarRestaurants(featureIds, businessIds));
-
+          var similarRestaurants = searchForBusinesse.getSimilarRestaurants(featureIds, businessIds);
+          $scope.restaurants = $scope.restaurants.concat(similarRestaurants);
         };
         $scope.selectAllRestaurants = function() {
-          //$scope.featuresToSearchFor = [];
           $scope.selectedRestaurants = angular.copy($scope.restaurants);
-          console.log($scope.selectedRestaurants);
         };
 
-        $scope.unselectedRestaurants = function() {
-          $scope.selectedRestaurants = [];
-          console.log($scope.selectedRestaurants);
-        };
-        $scope.setToNull = function() {
-          $scope.user.restaurants = null;
-        };
 
         $scope.findFeaturesOfSelectedRestaurants = function() {
           $scope.featuresToSearchFor = [];
@@ -92,11 +66,8 @@ function($scope, sharedVariables, feature, business, details, searchForBusinesse
               }
             }
           };
-          console.log($scope.featuresToSearchFor);
           $scope.isFeatureShown = true;
         };
-
-
 
       })
     })
