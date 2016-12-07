@@ -74,11 +74,16 @@ function($scope, sharedVariables, feature, business, details, searchForBusinesse
         $scope.resetAllRestaurants = function() {
           $scope.foo.selectedRestaurants = [];
           $scope.restaurants = [];
-        }
+        };
 
         $scope.setSelectedRestaurants = function() {
           sharedVariables.setSelectedBusinesses($scope.foo.selectedRestaurants);
-        }
+        };
+
+        $scope.clearSelection = function() {
+          $scope.foo.selectedRestaurants = [];
+        };
+
       })
     })
   });
