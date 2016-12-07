@@ -4,7 +4,7 @@ app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
         templateUrl: 'welcome.html',
-        controller: 'setBasicCtrl'
+        controller: 'welcomePage'
     })
     .when('/search', {
         templateUrl: 'search.html',
@@ -15,20 +15,6 @@ app.config(function($routeProvider) {
         controller: 'mainCtrl'
     })
 });
-
-app.controller('setBasicCtrl', ['$scope', 
-    function($scope) {
-        $scope.basic = {}
-
-        $scope.update = function(basic) {
-            $scope.basic = angular.copy(basic)
-        };
-        $scope.reset = function() {
-            $scope.basic = {};
-        };
-        $scope.reset();
-    }
-]);
 
 app.controller('mainCtrl', ['$scope', 
     function($scope) {

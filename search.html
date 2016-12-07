@@ -18,7 +18,7 @@
         <h3 class = "text-center"> </h3>
         <tr ng-repeat = "y in featuresToSearchFor">
             <td> 
-                <input type="checkbox" checklist-model="selectedFeatures" checklist-value="y"> {{y.name}}
+                <input type="checkbox" data-checklist-model="foo.selectedFeatures" data-checklist-value="y"> {{y.name}}
             </td>
         </tr>
         <tr>
@@ -40,7 +40,7 @@
         </tr>
         <tr ng-repeat="x in restaurants">
             <td> 
-                <input type="checkbox" data-checklist-model="selectedRestaurants" data-checklist-value="x"> {{ x.name }}
+                <input type="checkbox" data-checklist-model="foo.selectedRestaurants" data-checklist-value="x"> {{ x.name }}
             </td>
             <td> {{ x.stars }}</td>
             <td> {{ x.price }} </td>
@@ -49,6 +49,7 @@
         <tr>
             <td> <input type="button" class="btn btn-info" ng-click="selectAllRestaurants()" value="Select All"> </td>
             <td> <input type="button" class="btn btn-info" ng-click="findFeaturesOfSelectedRestaurants()" value="Find feature"> </td>
+            <td> <input type="button" class="btn btn-info" ng-click="resetAllRestaurants()" value="Reset"> </td>
         </tr>
     </table>
 </div>

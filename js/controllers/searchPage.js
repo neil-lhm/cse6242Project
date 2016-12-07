@@ -25,20 +25,22 @@ function($scope, sharedVariables, feature, business, details, searchForBusinesse
         $scope.featuresToSearchFor = [];
 
 
-        $scope.selectedRestaurants = [];
+        $scope.foo = {
+          selectedRestaurants : [],
+          selectedFeatures : []
+        };
 
-        $scope.selectedFeatures = [];
         $scope.similarRestaurants = [];
         
 
         $scope.selectAllFeatures = function() {
-          $scope.selectedFeatures = angular.copy($scope.featuresToSearchFor);
+          $scope.foo.selectedFeatures = angular.copy($scope.featuresToSearchFor);
         };
 
         $scope.getSimilarRestaurants = function() {
           var featureIds = [];
-          for (var i = 0; i < $scope.selectedFeatures.length; i++) {
-            featureIds.push($scope.selectedFeatures[i].id);
+          for (var i = 0; i < $scope.foo.selectedFeatures.length; i++) {
+            featureIds.push($scope.foo.selectedFeatures[i].id);
           }
           var businessIds = [];
           for (var i = 0; i < $scope.restaurants.length; i++) {
@@ -48,15 +50,15 @@ function($scope, sharedVariables, feature, business, details, searchForBusinesse
           $scope.restaurants = $scope.restaurants.concat(similarRestaurants);
         };
         $scope.selectAllRestaurants = function() {
-          $scope.selectedRestaurants = angular.copy($scope.restaurants);
+          $scope.foo.selectedRestaurants = angular.copy($scope.restaurants);
         };
 
 
         $scope.findFeaturesOfSelectedRestaurants = function() {
           $scope.featuresToSearchFor = [];
           var visited = [];
-          for (var i = 0; i < $scope.selectedRestaurants.length; i++) {
-            var restaurant = $scope.selectedRestaurants[i];
+          for (var i = 0; i < $scope.foo.selectedRestaurants.length; i++) {
+            var restaurant = $scope.foo.selectedRestaurants[i];
             for (var j = 0; j < restaurant.features.length; j++) {
               var feature = restaurant.features[j];
               var featureId = restaurant.featureIds[j];
@@ -69,6 +71,10 @@ function($scope, sharedVariables, feature, business, details, searchForBusinesse
           $scope.isFeatureShown = true;
         };
 
+        $scope.resetAllRestaurants = function() {
+          $scope.foo.selectedRestaurants = [];
+          $scope.restaurants = [];
+        }
       })
     })
   });
