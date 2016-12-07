@@ -7,6 +7,7 @@ function(){
   var businessIds;
   var details;
   var selectedCityAndState;
+  var selectedBusinesses;
 
   return {
     setFeatures: function(val) {
@@ -24,6 +25,9 @@ function(){
     setSelectedCityAndState: function(val) {
       selectedCityAndState = val;
     },
+    setSelectedBusinesses: function(val) {
+      selectedBusinesses = val;
+    },
     getFeatures: function(){
       return features;
     },
@@ -38,6 +42,9 @@ function(){
     },
     getSelectedCityAndState: function() {
       return selectedCityAndState;
+    },
+    getSelectedBusinesses: function() {
+      return selectedBusinesses;
     }
   }
 

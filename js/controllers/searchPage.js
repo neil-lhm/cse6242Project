@@ -75,6 +75,10 @@ function($scope, sharedVariables, feature, business, details, searchForBusinesse
           $scope.foo.selectedRestaurants = [];
           $scope.restaurants = [];
         }
+
+        $scope.setSelectedRestaurants = function() {
+          sharedVariables.setSelectedBusinesses($scope.foo.selectedRestaurants);
+        }
       })
     })
   });

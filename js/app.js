@@ -1,18 +1,18 @@
 var app = angular.module('recommender', 
-['ngRoute', 'checklist-model', 'ngResource', 'ngAnimate', 'ui.bootstrap'])
+['ngRoute', 'checklist-model', 'ngResource', 'ngAnimate', 'ui.bootstrap', 'uiGmapgoogle-maps'])
 
 app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: 'welcome.html',
+        templateUrl: './views/welcome.html',
         controller: 'welcomePage'
     })
     .when('/search', {
-        templateUrl: 'search.html',
+        templateUrl: './views/search.html',
         controller: 'searchPage'
     })
     .when('/map', {
-        templateUrl: 'map.html',
+        templateUrl: './views/map.html',
         controller: 'mapPage'
     })
 });
