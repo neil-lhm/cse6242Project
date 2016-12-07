@@ -1,0 +1,9 @@
+.angular-google-map-container {
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    right: 40px;
+    left: 0;
+}

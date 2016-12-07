@@ -43,7 +43,7 @@ function(sharedVariables){
         for (var key in details) {
             if (existedBusinessIds.indexOf(key) < 0 || existedBusinessIds.length == 0) {
                 var business = details[key];
-                if (business['stars'] > 3.5) {
+                if (business['stars'] > 3.5 && isCityAndStateMatch(business, sharedVariables.getSelectedCityAndState())) {
                     business["id"] = key;
                     var featureIdsOfThisBusiness = [];
                     for (var k in allBusinesses[key]) featureIdsOfThisBusiness.push(k);
@@ -85,6 +85,10 @@ function(sharedVariables){
 
     this.getSimilarRestaurants = function(featureIdsToSearch, existedBusinessIds) {
         return getBusinesses(featureIdsToSearch, existedBusinessIds);
+    }
+
+    function isCityAndStateMatch(business, cityAndState) {
+        return business['city'] == cityAndState ['city'] && business['state'] == cityAndState['state'];
     }
 
 

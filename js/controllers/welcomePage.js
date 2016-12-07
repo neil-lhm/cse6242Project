@@ -3,35 +3,32 @@ var app = angular.module('recommender');
 app.controller('welcomePage', ['$scope', 'details', 'sharedVariables',
 function($scope, details, sharedVariables) {
 
+
   details.getDetails().$promise.then(function(details){
     sharedVariables.setDetails(details);
 
-    var uniqueCitiesAndStates = [];
+    $scope.uniqueCitiesAndStates = [];
     for (var businessId in details) {
       var business = details[businessId];
 
       var cityAndState = {
         'city': business['city'],
-        'state': business['state']
+        'state': business['state'],
+        'combined' : business['city'] + ',' + business['state']
       };
-      if (isUnique(uniqueCitiesAndStates, cityAndState)) {
+      if (isUnique($scope.uniqueCitiesAndStates, cityAndState)) {
 
-        uniqueCitiesAndStates.push(cityAndState);
+        $scope.uniqueCitiesAndStates.push(cityAndState);
       }
     }
-    //console.log(uniqueCitiesAndStates);
-    
 
-    $scope.basic = {}
+    $scope.setSelectedCityAndState = function() {
+      sharedVariables.setSelectedCityAndState($scope.selectedCityAndState);
+    }
 
-    $scope.update = function(basic) {
-        $scope.basic = angular.copy(basic)
-    };
-    $scope.reset = function() {
-        $scope.basic = {};
-    };
-    $scope.reset();
   });
+
+
 
   function isUnique(arr, obj) {
     for (var i = 0; i < arr.length; i++) {
